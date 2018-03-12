@@ -17,13 +17,16 @@ pull(
               author
             }))
           }
-        } else if (author.hasOwnProperty('name')) {
-          if (author.name.includes(':')) {
-            console.log(JSON.stringify({
-              name: meta.name,
-              author
-            }))
-          }
+        } else if (typeof author === 'object') {
+          Object.keys(author).forEach(function (key) {
+            var value = author[key]
+            if (typeof value === 'string' && value.includes(':')) {
+              console.log(JSON.stringify({
+                name: meta.name,
+                author
+              }))
+            }
+          })
         }
         var contributors = meta.contributors
         if (Array.isArray(contributors)) {
@@ -35,13 +38,16 @@ pull(
                   contributor
                 }))
               }
-            } else if (contributor.hasOwnProperty('name')) {
-              if (contributor.name.includes(':')) {
-                console.log(JSON.stringify({
-                  name: meta.name,
-                  contributor
-                }))
-              }
+            } else if (typeof contributor === 'string') {
+              Object.keys(author).forEach(function (key) {
+                var value = author[key]
+                if (typeof value === 'string' && value.includes(':')) {
+                  console.log(JSON.stringify({
+                    name: meta.name,
+                    author
+                  }))
+                }
+              })
             }
           })
         }
